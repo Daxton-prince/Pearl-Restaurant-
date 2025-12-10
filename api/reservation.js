@@ -50,7 +50,7 @@ module.exports = async (req, res) => {
 
     // 1. Send email to restaurant
     await resend.emails.send({
-      from: 'Restaurant Reservations <onboarding@resend.dev>', // Use your verified domain later
+      from: 'PEARL RESTAURANT', // Use your verified domain later
       to: restaurantEmail,
       subject: `New Reservation - ${name}`,
       html: `
