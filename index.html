@@ -525,48 +525,66 @@
                     </div>
                 </div>
             </div>
-            <div class="contact-form">
-                <form id="reservationForm">
-                    <h3 style="text-align: center;">Reservation Form</h3>
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone</label>
-                        <input type="tel" id="phone" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="date">Date</label>
-                        <input type="date" id="date" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="time">Time</label>
-                        <input type="time" id="time" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="guests">Number of Guests</label>
-                        <select id="guests" class="form-control" required>
-                            <option value="1">1 Person</option>
-                            <option value="2">2 People</option>
-                            <option value="3">3 People</option>
-                            <option value="4">4 People</option>
-                            <option value="5">5 People</option>
-                            <option value="6">6 People</option>
-                            <option value="7">7+ People</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Special Requests</label>
-                        <textarea id="message" class="form-control"></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">Make Reservation</button>
-                </form>
-            </div>
+             <div class="contact-form">
+            <div id="messageContainer"></div>
+            <div class="loading" id="loading">Sending reservation...</div>
+            
+            <form id="reservationForm">
+                <h3>Reservation Form</h3>
+
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" class="form-control" required placeholder="Enter your full name">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" class="form-control" required placeholder="your@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone *</label>
+                    <input type="tel" id="phone" class="form-control" required placeholder="Enter your phone number">
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Date *</label>
+                    <input type="date" id="date" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="time">Time *</label>
+                    <input type="time" id="time" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="guests">Number of Guests *</label>
+                    <select id="guests" class="form-control" required>
+                        <option value="" disabled selected>Select number of guests</option>
+                        <option value="1">1 Person</option>
+                        <option value="2">2 People</option>
+                        <option value="3">3 People</option>
+                        <option value="4">4 People</option>
+                        <option value="5">5 People</option>
+                        <option value="6">6 People</option>
+                        <option value="7">7+ People</option>
+                        <option value="custom">Custom</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="customGuestDiv" style="display:none;">
+                    <label for="customGuests">Enter Number *</label>
+                    <input type="number" id="customGuests" class="form-control" min="1" placeholder="Enter number of guests">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Order Details / Special Requests *</label>
+                    <textarea id="message" class="form-control" placeholder="Type your order details or special requests..." required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">Send Reservation</button>
+            </form>
+        </div>
         </div>
     </section>
 
@@ -835,27 +853,121 @@
         }, 5000);
 
         // Form Submission
-        const reservationForm = document.getElementById('reservationForm');
-        reservationForm.addEventListener('submit', (e) => {
+          // Show/hide custom guests input
+        document.getElementById('guests').addEventListener('change', function() {
+            const customGuestDiv = document.getElementById('customGuestDiv');
+            if (this.value === 'custom') {
+                customGuestDiv.style.display = 'block';
+                document.getElementById('customGuests').required = true;
+            } else {
+                customGuestDiv.style.display = 'none';
+                document.getElementById('customGuests').required = false;
+            }
+        });
+
+        // Form submission
+        document.getElementById('reservationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            // Get form values
+            // Get form data
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const phone = document.getElementById('phone').value;
             const date = document.getElementById('date').value;
             const time = document.getElementById('time').value;
-            const guests = document.getElementById('guests').value;
+            let guests = document.getElementById('guests').value;
             const message = document.getElementById('message').value;
             
-            // Here you would typically send this data to a server
-            // For demo purposes, we'll just show an alert
-            alert(`Thank you, ${name}! Your reservation for ${guests} on ${date} at ${time} has been received. We'll contact you shortly to confirm.`);
+            // Handle custom guests
+            if (guests === 'custom') {
+                guests = document.getElementById('customGuests').value;
+                if (!guests || guests < 1) {
+                    showMessage('Please enter a valid number of guests', 'error');
+                    return;
+                }
+            }
             
-            // Reset form
-            reservationForm.reset();
+            // Validate date (not in the past)
+            const selectedDate = new Date(date);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            if (selectedDate < today) {
+                showMessage('Please select a future date', 'error');
+                return;
+            }
+            
+            // Show loading
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('submitBtn').disabled = true;
+            
+            // Prepare data
+            const formData = {
+                name: name,
+                email: email,
+                phone: phone,
+                date: date,
+                time: time,
+                guests: guests,
+                message: message,
+                timestamp: new Date().toISOString()
+            };
+            
+            try {
+                // Send to backend API
+                const response = await fetch('/api/reservation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    // Success
+                    showMessage(`Thank you ${name}! Your reservation has been submitted. A confirmation email has been sent to ${email}`, 'success');
+                    document.getElementById('reservationForm').reset();
+                    document.getElementById('customGuestDiv').style.display = 'none';
+                } else {
+                    // Error from server
+                    showMessage(result.error || 'Failed to submit reservation. Please try again.', 'error');
+                }
+            } catch (error) {
+                // Network error
+                console.error('Error:', error);
+                showMessage('Network error. Please check your connection and try again.', 'error');
+            } finally {
+                // Hide loading
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('submitBtn').disabled = false;
+            }
         });
-
+        
+        // Function to show messages
+        function showMessage(text, type) {
+            const messageContainer = document.getElementById('messageContainer');
+            messageContainer.textContent = text;
+            messageContainer.className = type;
+            messageContainer.style.display = 'block';
+            
+            // Auto-hide after 10 seconds for success, 5 for error
+            setTimeout(() => {
+                if (messageContainer.style.display === 'block') {
+                    messageContainer.style.display = 'none';
+                }
+            }, type === 'success' ? 10000 : 5000);
+        }
+        
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('date').min = today;
+        
+        // Set default time to next hour
+        const nextHour = new Date();
+        nextHour.setHours(nextHour.getHours() + 1);
+        document.getElementById('time').value = nextHour.toTimeString().substring(0, 5);
         // Gallery Lightbox (would need additional HTML/CSS for full implementation)
         const galleryItems = document.querySelectorAll('.gallery-item');
         galleryItems.forEach(item => {
