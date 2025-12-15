@@ -698,10 +698,7 @@ h2:hover{
                 text-align: center;
                 
             }
-            .iframe{
-                width:100%;
-                background-color: #80FF00;
-            }
+           
             .zoomed-image.active{
                  left: 40% !important;
 
@@ -731,9 +728,7 @@ h2:hover{
             .nav-container {
                 padding: 1rem;
             }
-       .iframe{
-         width:100vh;
-       }
+      
             nav ul {
                 position: fixed;
                 top: 70px;
