@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonials System</title>
+    <style>
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #000000; /* Purple */
+            --primary-dark: #ffffff;
+            --secondary: #03011d; /* Dark blue/black */
+            --accent: #09ff00; /* Green */
+            --text-light: #f8fafc; /* White */
+            --text-dark: #ffffff;
+            --card-bg: #91009e;
+            --shadow: 0 10px 25px rgba(139, 92, 246, 0.15);
+            --shadow-lg: 0 20px 40px rgba(139, 92, 246, 0.2);
+            --radius: 16px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: black;
+            min-height: 100vh;
+            display: flex;
+            max-width: 70%;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            max-width: 800px;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, var(--text-light) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-light);
+        }
+
+        /* Container */
+        .container {
+            width: 100vh;
+            max-width: 1800px;
+            display: grid;
+            gap: 40px;
+            margin:auto;
+            
+        }
+
+        /* Form Section */
+        .form-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding:5px;
+            border-radius: var(--radius);
+            justify-content: center;
+            display: grid;
+            box-shadow: var(--shadow);
+            width: 600px;
+            margin: auto;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .form-title {
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 0.95rem;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            top:0;
+            gap:1;
+            padding: 4px 8px;
+            border-bottom: 2px solid rgb(255, 255, 255);
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.3s;
+            background: rgba(255, 0, 221, 0.9);
+            color:white;
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: white;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        textarea {
+            min-height: 80px;
+            color: aliceblue;
+            resize: vertical;
+            line-height: 1.5;
+        }
+
+        .submit-btn {
+            background: purple;
+            color: var(--text-light);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+           input::placeholder{
+            color:antiquewhite;
+           }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            background-color: #ea00ff;
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+        }
+
+        /* Avatar Preview */
+        .avatar-preview {
+            display: flex;
+            align-items: center;
+            margin-top: 22px;
+            padding: 15px;
+            margin-left: 1px;
+            background:transparent;
+            border-radius: 10px;
+            border: none;
+        }
+
+        .avatar-preview span {
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 20px;
+            color: white;
+            background:rgb(255, 1, 255);
+            flex-shrink: 0;
+        }
+
+        /* Character Counter */
+        .char-counter {
+            text-align: right;
+            margin-top: 8px;
+            color: var(--text-light);
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .char-counter.warning {
+            color: #f87171;
+            font-weight: 600;
+        }
+
+        /* Slider Container */
+        .slider-container {
+            position:relative;
+            max-width: 900px;
+            margin: 0 auto;
+            margin-left: 10%;
+        }
+
+        .slider-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .slider-header h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-light);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 30px;
+            border-radius: var(--radius);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        /* Slider Wrapper - FIXED SIZE */
+        .slider-wrapper {
+            position: relative;
+            width:850px;
+            overflow: hidden;
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px 0;
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        /* Testimonial Slide - FIXED CARD SIZE */
+        .testimonial-slide {
+            flex: 1 0 850px; /* Fixed card width */
+            width: 800px;
+            padding: 0 20px;
+            box-sizing: border-box;
+            opacity: 0.6;
+            transform: scale(0.95);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .testimonial-slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Testimonial Card - Compact Design */
+        .testimonial-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            border: 2px solid rgba(139, 92, 246, 0.2);
+            height: 280px; /* Fixed height */
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s;
+            position: static;
+            overflow: hidden;
+        }
+
+        .testimonial-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .avatar-lg {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            color: white;
+            margin-right: 15px;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+        }
+
+        .testimonial-info {
+            flex: 1;
+            min-width: 0; /* Prevent text overflow */
+        }
+
+        .testimonial-info h3 {
+            color: var(--text-dark);
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .testimonial-date {
+            color: var(--primary);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .testimonial-text {
+            color: var(--text-dark);
+            line-height: 1.6;
+            font-size: 0.95rem;
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px 0;
+            position: relative;
+            max-height: 120px;
+        }
+
+        .testimonial-text::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .testimonial-text::-webkit-scrollbar-track {
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 2px;
+        }
+
+        .testimonial-text::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* Star Rating */
+        .star-rating {
+            display: flex;
+            gap: 2px;
+            margin-left: 10px;
+        }
+
+        .star {
+            color: #fbbf24;
+            font-size: 14px;
+        }
+
+        /* Navigation Arrows - FIXED POSITION */
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            z-index: 10;
+            border: none;
+            font-size: 22px;
+            color: var(--primary);
+        }
+
+        .slider-nav:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-nav:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: translateY(-50%);
+        }
+
+        .slider-nav:disabled:hover {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--primary);
+            transform: translateY(-50%);
+        }
+
+        .slider-nav.prev {
+            left: -1px;
+        }
+
+        .slider-nav.next {
+            right: -1px;
+        }
+
+        /* Slider Dots */
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 30px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dot:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .dot.active {
+            background: var(--accent);
+            transform: scale(1.3);
+        }
+
+        /* Admin Icon */
+        .admin-icon {
+            position: fixed;
+            bottom: 50px;
+            right: 20px;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .admin-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .empty-state .icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+         h4{
+            font-size: 1rem;
+            font-weight: bolder;
+            text-decoration: underline;
+
+         }
+         summary{
+            font-size: 0px;
+         }
+         h4:hover{
+            cursor: pointer;
+            transform: scale(1.0);
+            transition: all 0.3s;
+         }
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .testimonial-slide {
+                flex: 0 0 300px;
+                width: 400px;
+            }
+            
+            .testimonial-card {
+                height: 260px;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .form-section {
+                padding: 25px 20px;
+                max-width: 450px;
+            }
+            
+            .slider-wrapper {
+                padding: 25px 0;
+                width:460px;
+            }
+            
+            .testimonial-slide {
+                flex: 0 0 450px;
+                width: 350px;
+                padding: 0 15px;
+            }
+            
+            .testimonial-card {
+                height: 250px;
+                padding: 20px;
+            }
+            
+            .slider-nav {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+            
+            .slider-nav.prev {
+                left: -1px;
+            }
+            
+            .slider-nav.next {
+                right: -1px;
+            }
+            
+            .avatar-lg {
+                width: 50px;
+                height: 50px;
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .slider-header h2 {
+                font-size: 1.5rem;
+                padding: 12px 20px;
+            }
+            
+            .testimonial-slide {
+                flex: 1 0 300px;
+                width: 300px;
+                padding: 0 10px;
+            }
+            
+            .testimonial-card {
+                height: 240px;
+                padding: 18px;
+            }
+            
+            .testimonial-info h3 {
+                font-size: 1.1rem;
+            }
+            
+            .testimonial-text {
+                font-size: 0.9rem;
+                max-height: 110px;
+            }
+            
+            .slider-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+            
+            .slider-nav.prev {
+                left: -1px;
+            }
+            
+            .slider-nav.next {
+                right: -1px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 20px 15px;
+            }
+            
+            .testimonial-slide {
+                flex: 1 0 280px;
+                width: 100px;
+            }
+            
+            .testimonial-card {
+                height: 230px;
+                padding: 15px;
+            }
+            
+            .testimonial-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .avatar-lg {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="container">
+        <details>
+            <summary><h4>Click To Share Your experience With us<h4></h4></summary>
+        <!-- Submit Form -->
+        <div class="form-section fade-in">
+
+            <h2 class="form-title">📝 Share Your Experience</h2>
+
+            <form id="testimonial-form">
+                  <div class="avatar-preview">
+                    <div id="avatar-preview" class="avatar">
+                        ??
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="client-name">Your Name</label>
+                    <input type="text" id="client-name" placeholder="John Smith" required maxlength="50">
+                </div>
+                
+                <div class="form-group">
+                    <label for="testimonial-text">Your Testimonial</label>
+                    <textarea id="testimonial-text" placeholder="Tell us about your experience..." required maxlength="300"></textarea>
+                    <div id="char-counter" class="char-counter">0/300 characters</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="rating">Rating</label>
+                    <select id="rating">
+                        <option value="5">★★★★★ Excellent</option>
+                        <option value="4">★★★★ Very Good</option>
+                        <option value="3">★★★ Good</option>
+                        <option value="2">★★ Fair</option>
+                        <option value="1">★ Poor</option>
+                    </select>
+                </div>
+                
+              
+                <button type="submit" class="submit-btn">
+                    <span>Submit Testimonial</span>
+                </button>
+            </form>
+        </div>
+        </details>
+        <!-- Testimonials Slider -->
+        <div class="slider-container fade-in">
+            <div class="slider-header">
+                <h2>
+                    💬 Customer Feedback
+                </h2>
+            </div>
+            
+            <div class="slider-wrapper">
+                <div class="slider-track" id="slider-track">
+                    <!-- Testimonials will be loaded here -->
+                </div>
+                
+                <!-- Navigation Arrows -->
+                <button class="slider-nav prev" id="prev-btn" onclick="prevSlide()" aria-label="Previous testimonial">
+                    ←
+                </button>
+                <button class="slider-nav next" id="next-btn" onclick="nextSlide()" aria-label="Next testimonial">
+                    →
+                </button>
+            </div>
+            
+            <!-- Dots Indicator -->
+            <div class="slider-dots" id="slider-dots">
+                <!-- Dots will be generated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Icon -->
+    <div class="admin-icon" id="admin-icon" title="Admin Panel" onclick="openAdminPanel()">
+        ⚙️
+    </div>
+
+    <script>
+        // ======================== CONFIGURATION ========================
+        const STORAGE_KEY = 'testimonials_system_final';
+        const ADMIN_PASSWORD = 'admin123'; // Change this in production
+        const AUTO_SLIDE_INTERVAL = 5000; // 5 seconds
+        
+        // ======================== GLOBAL STATE ========================
+        let currentSlide = 0;
+        let totalSlides = 0;
+        let autoSlideTimer = null;
+        let testimonials = [];
+        let slideWidth = 450; // Default card width
+        
+        // ======================== INITIALIZATION ========================
+        document.addEventListener('DOMContentLoaded', function() {
+            init();
+            window.addEventListener('resize', updateSlideWidth);
+        });
+        
+        function init() {
+            loadTestimonials();
+            setupEventListeners();
+            updateAvatarPreview();
+            updateCharCounter();
+            startAutoSlide();
+            updateSlideWidth();
+        }
+        
+        function setupEventListeners() {
+            // Form submission
+            document.getElementById('testimonial-form').addEventListener('submit', submitTestimonial);
+            
+            // Real-time updates
+            document.getElementById('client-name').addEventListener('input', updateAvatarPreview);
+            document.getElementById('testimonial-text').addEventListener('input', updateCharCounter);
+            
+            // Admin icon
+            document.getElementById('admin-icon').addEventListener('click', openAdminPanel);
+            
+            // Touch/swipe support
+            let touchStartX = 0;
+            const sliderWrapper = document.querySelector('.slider-wrapper');
+            
+            sliderWrapper.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+                pauseAutoSlide();
+            });
+            
+            sliderWrapper.addEventListener('touchend', e => {
+                const touchEndX = e.changedTouches[0].screenX;
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) {
+                        nextSlide();
+                    } else {
+                        prevSlide();
+                    }
+                }
+                setTimeout(startAutoSlide, 3000);
+            });
+            
+            // Pause auto-slide on hover
+            sliderWrapper.addEventListener('mouseenter', pauseAutoSlide);
+            sliderWrapper.addEventListener('mouseleave', startAutoSlide);
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') prevSlide();
+                if (e.key === 'ArrowRight') nextSlide();
+            });
+        }
+        
+        // ======================== SLIDER FUNCTIONS ========================
+        function updateSlideWidth() {
+            // Get the slide width from CSS
+            const slide = document.querySelector('.testimonial-slide');
+            if (slide) {
+                const computedStyle = window.getComputedStyle(slide);
+                slideWidth = parseFloat(computedStyle.flexBasis || computedStyle.width);
+            }
+            updateSliderPosition();
+        }
+        
+        function updateSlider() {
+            const sliderTrack = document.getElementById('slider-track');
+            const dotsContainer = document.getElementById('slider-dots');
+            
+            totalSlides = testimonials.length;
+            
+            if (testimonials.length === 0) {
+                sliderTrack.innerHTML = `
+                    <div class="testimonial-slide active">
+                        <div class="testimonial-card">
+                            <div class="empty-state">
+                                <div class="icon">💭</div>
+                                <h3>No Testimonials Yet</h3>
+                                <p>Be the first to share your experience!</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                dotsContainer.innerHTML = '<div class="dot active"></div>';
+                updateNavigationButtons();
+                return;
+            }
+            
+            // Generate slides
+            let slidesHTML = '';
+            testimonials.forEach((testimonial, index) => {
+                const date = new Date(testimonial.date);
+                const formattedDate = date.toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                
+                const stars = getStarRating(testimonial.rating);
+                const isActive = index === currentSlide;
+                const slideClass = isActive ? 'testimonial-slide active' : 'testimonial-slide';
+                
+                slidesHTML += `
+                    <div class="${slideClass}" data-index="${index}">
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="avatar-lg" style="background: ${testimonial.color}">
+                                    ${testimonial.initials}
+                                </div>
+                                <div class="testimonial-info">
+                                    <h3>${escapeHtml(testimonial.name)}</h3>
+                                    <div class="testimonial-date">
+                                        📅 ${formattedDate}
+                                        <div class="star-rating">${stars}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="testimonial-text">
+                                "${escapeHtml(testimonial.text)}"
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            sliderTrack.innerHTML = slidesHTML;
+            
+            // Generate dots
+            dotsContainer.innerHTML = '';
+            const maxDots = Math.min(testimonials.length, 10);
+            for (let i = 0; i < maxDots; i++) {
+                const isActive = i === currentSlide;
+                dotsContainer.innerHTML += `<div class="dot ${isActive ? 'active' : ''}" onclick="goToSlide(${i})"></div>`;
+            }
+            
+            updateSliderPosition();
+            updateNavigationButtons();
+        }
+        
+        function updateSliderPosition() {
+            const sliderTrack = document.getElementById('slider-track');
+            if (!sliderTrack) return;
+            
+            const translateX = -currentSlide * slideWidth;
+            sliderTrack.style.transform = `translateX(${translateX}px)`;
+        }
+        
+        function updateActiveSlide() {
+            document.querySelectorAll('.testimonial-slide').forEach((slide, index) => {
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                    slide.style.opacity = '1';
+                    slide.style.transform = 'scale(1)';
+                } else {
+                    slide.classList.remove('active');
+                    slide.style.opacity = '0.6';
+                    slide.style.transform = 'scale(0.95)';
+                }
+            });
+            
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+            
+            updateSliderPosition();
+            updateNavigationButtons();
+        }
+        
+        function updateNavigationButtons() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            
+            if (prevBtn && nextBtn) {
+                prevBtn.disabled = totalSlides <= 1 || currentSlide === 0;
+                nextBtn.disabled = totalSlides <= 1 || currentSlide === totalSlides - 1;
+            }
+        }
+        
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+            } else {
+                currentSlide = 0; // Loop to start
+            }
+            updateActiveSlide();
+            resetAutoSlide();
+        }
+        
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+            } else {
+                currentSlide = totalSlides - 1; // Loop to end
+            }
+            updateActiveSlide();
+            resetAutoSlide();
+        }
+        
+        function goToSlide(index) {
+            if (index >= 0 && index < totalSlides) {
+                currentSlide = index;
+                updateActiveSlide();
+                resetAutoSlide();
+            }
+        }
+        
+        // ======================== AUTO SLIDE ========================
+        function startAutoSlide() {
+            if (totalSlides <= 1) return;
+            
+            pauseAutoSlide();
+            autoSlideTimer = setInterval(nextSlide, AUTO_SLIDE_INTERVAL);
+        }
+        
+        function pauseAutoSlide() {
+            if (autoSlideTimer) {
+                clearInterval(autoSlideTimer);
+                autoSlideTimer = null;
+            }
+        }
+        
+        function resetAutoSlide() {
+            pauseAutoSlide();
+            startAutoSlide();
+        }
+        
+        // ======================== TESTIMONIAL MANAGEMENT ========================
+        function loadTestimonials() {
+            try {
+                const stored = localStorage.getItem(STORAGE_KEY);
+                testimonials = stored ? JSON.parse(stored) : getSampleTestimonials();
+                updateSlider();
+            } catch (error) {
+                console.error('Error loading testimonials:', error);
+                testimonials = getSampleTestimonials();
+                updateSlider();
+            }
+        }
+        
+        function saveTestimonials() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(testimonials));
+                updateSlider();
+                showNotification('Testimonial saved successfully!', 'success');
+            } catch (error) {
+                console.error('Error saving testimonials:', error);
+                showNotification('Error saving testimonial', 'error');
+            }
+        }
+        
+        function submitTestimonial(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('client-name').value.trim();
+            const text = document.getElementById('testimonial-text').value.trim();
+            const rating = parseInt(document.getElementById('rating').value);
+            
+            // Validation
+            if (!name || name.length < 2) {
+                showNotification('Please enter a valid name (minimum 2 characters)', 'error');
+                return;
+            }
+            
+            if (!text || text.length < 10) {
+                showNotification('Please enter a testimonial (minimum 10 characters)', 'error');
+                return;
+            }
+            
+            if (text.length > 300) {
+                showNotification('Testimonial is too long (maximum 300 characters)', 'error');
+                return;
+            }
+            
+            // Create testimonial
+            const testimonial = {
+                id: Date.now() + Math.random(),
+                name: name,
+                text: text,
+                rating: rating,
+                date: new Date().toISOString(),
+                initials: generateAvatar(name),
+                color: getAvatarColor(name)
+            };
+            
+            // Add to beginning
+            testimonials.unshift(testimonial);
+            
+            // Limit to 50 testimonials
+            if (testimonials.length > 50) {
+                testimonials = testimonials.slice(0, 50);
+            }
+            
+            saveTestimonials();
+            
+            // Reset form
+            document.getElementById('testimonial-form').reset();
+            document.getElementById('rating').value = '5';
+            updateAvatarPreview();
+            updateCharCounter();
+            
+            // Go to first slide
+            currentSlide = 0;
+            updateActiveSlide();
+        }
+        
+        // ======================== UTILITY FUNCTIONS ========================
+        function generateAvatar(name) {
+            if (!name) return '??';
+            const words = name.trim().split(' ');
+            if (words.length === 1) return words[0].substring(0, 2).toUpperCase();
+            return (words[0][0] + words[words.length - 1][0]).toUpperCase();
+        }
+        
+        function getAvatarColor(name) {
+            const colors = [
+                'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)',
+                'linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)',
+                'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
+                'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                'linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)'
+            ];
+            let hash = 0;
+            for (let i = 0; i < name.length; i++) {
+                hash = name.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            return colors[Math.abs(hash) % colors.length];
+        }
+        
+        function getStarRating(rating) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= rating) {
+                    stars += '<span class="star">★</span>';
+                } else {
+                    stars += '<span class="star" style="color: #9ca3af;">★</span>';
+                }
+            }
+            return stars;
+        }
+        
+        function updateAvatarPreview() {
+            const name = document.getElementById('client-name').value.trim();
+            const avatar = document.getElementById('avatar-preview');
+            avatar.textContent = generateAvatar(name);
+            avatar.style.background = getAvatarColor(name || 'Default');
+        }
+        
+        function updateCharCounter() {
+            const text = document.getElementById('testimonial-text').value;
+            const counter = document.getElementById('char-counter');
+            counter.textContent = `${text.length}/300 characters`;
+            counter.classList.toggle('warning', text.length > 270);
+        }
+        
+        function getSampleTestimonials() {
+            const samples = [
+                {
+                    id: 1,
+                    name: "Alex Johnson",
+                    text: "Amazing service! The team was professional and delivered beyond expectations. Highly recommended for anyone looking for quality work.",
+                    rating: 5,
+                    date: new Date(Date.now() - 86400000).toISOString(),
+                    initials: "AJ",
+                    color: getAvatarColor("Alex Johnson")
+                },
+                {
+                    id: 2,
+                    name: "Sarah Williams",
+                    text: "Excellent communication throughout the project. The results exceeded my expectations. Will definitely work with them again!",
+                    rating: 4,
+                    date: new Date(Date.now() - 172800000).toISOString(),
+                    initials: "SW",
+                    color: getAvatarColor("Sarah Williams")
+                },
+                {
+                    id: 3,
+                    name: "Michael Chen",
+                    text: "Professional team that understands client needs. Delivered on time and within budget. Very satisfied with the outcome.",
+                    rating: 5,
+                    date: new Date(Date.now() - 259200000).toISOString(),
+                    initials: "MC",
+                    color: getAvatarColor("Michael Chen")
+                }
+            ];
+            
+            // Add to testimonials array
+            return samples;
+        }
+        
+        // ======================== NOTIFICATION SYSTEM ========================
+        function showNotification(message, type = 'info') {
+            // Create notification
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#8b5cf6'};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+                z-index: 1000;
+                animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                max-width: 300px;
+                font-weight: 500;
+            `;
+            
+            // Add animation
+            document.head.insertAdjacentHTML('beforeend', `
+                <style>
+                    @keyframes slideInRight {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                    @keyframes slideOutRight {
+                        from { transform: translateX(0); opacity: 1; }
+                        to { transform: translateX(100%); opacity: 0; }
+                    }
+                </style>
+            `);
+            
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                setTimeout(() => notification.remove(), 400);
+            }, 3000);
+        }
+        
+        // ======================== ADMIN PANEL SIMPLIFIED ========================
+        function openAdminPanel() {
+            const password = prompt('Enter admin password:');
+            if (password === ADMIN_PASSWORD) {
+                if (confirm('Clear all testimonials? This cannot be undone!')) {
+                    testimonials = [];
+                    currentSlide = 0;
+                    saveTestimonials();
+                    showNotification('All testimonials cleared', 'success');
+                }
+            } else if (password !== null) {
+                showNotification('Incorrect password', 'error');
+            }
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>
