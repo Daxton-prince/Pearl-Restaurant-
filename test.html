@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testimonials System</title>
+    <title>test</title>
+
     <style>
         /* Reset & Base */
         * {
-            margin: 0;
+            margin:0;
             padding: 0;
+            gap:0;
             box-sizing: border-box;
         }
 
         :root {
-            --primary: #000000; /* Purple */
-            --primary-dark: #ffffff;
-            --secondary: #03011d; /* Dark blue/black */
-            --accent: #09ff00; /* Green */
+            --primary: #8b5cf6; /* Purple */
+            --primary-dark: #7c3aed;
+            --secondary: #1e293b; /* Dark blue/black */
+            --accent: #db0c9d; /* Green */
             --text-light: #f8fafc; /* White */
-            --text-dark: #ffffff;
-            --card-bg: #91009e;
+            --text-dark: #0f172a;
+            --card-bg: #ffffff;
             --shadow: 0 10px 25px rgba(139, 92, 246, 0.15);
             --shadow-lg: 0 20px 40px rgba(139, 92, 246, 0.2);
             --radius: 16px;
@@ -27,62 +29,48 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: black;
-            min-height: 100vh;
-            display: flex;
+            background:transparent;
+            min-height: 100%;
+            min-height: 100%;
+            display: block;
             max-width: 70%;
+            gap:0;
+            margin:0;
             flex-direction: column;
             align-items: center;
-            padding: 30px 20px;
+            padding:20px;
+            overflow-x: hidden;
             color: var(--text-light);
-            line-height: 1.6;
-        }
-
-        /* Header */
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            max-width: 800px;
-        }
-
-        .header h1 {
-            font-size: 2.8rem;
-            font-weight: 800;
-            margin-bottom: 15px;
-            background: linear-gradient(to right, var(--text-light) 0%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-            color: var(--text-light);
+            line-height: 1;
         }
 
         /* Container */
         .container {
-            width: 100vh;
-            max-width: 1800px;
-            display: grid;
-            gap: 40px;
-            margin:auto;
+            width:100%;
+            max-width: 1200px;
+              display: flex;
+              flex-direction: column; /* stacked by default */
+             gap: 20px;
+             height: 100%;
             
         }
-
+        .section,.details{
+             padding: 20px;
+    flex: 1;
+    min-width: 0;
+        }
         /* Form Section */
         .form-section {
-            background: rgba(255, 255, 255, 0.1);
+            background:hwb(300 3% 49%);
             backdrop-filter: blur(10px);
-            padding:5px;
             border-radius: var(--radius);
-            justify-content: center;
-            display: grid;
             box-shadow: var(--shadow);
-            width: 600px;
-            margin: auto;
+            max-width:500px;
+            margin: 0 auto;
+            display: block;
+            width: 100%;
+            height: 90%;
+            padding:20px;
             border: 1px solid rgba(139, 92, 246, 0.3);
         }
 
@@ -92,6 +80,7 @@
             color: var(--text-light);
             display: flex;
             align-items: center;
+            gap: 10px;
         }
 
         .form-group {
@@ -102,41 +91,45 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            color: var(--accent);
+            color:whitesmoke;
             font-size: 0.95rem;
         }
-
+         div{
+           gap:0;
+         }
         input, textarea, select {
             width: 100%;
-            top:0;
-            gap:1;
-            padding: 4px 8px;
-            border-bottom: 2px solid rgb(255, 255, 255);
+            padding: 10px 10px;
+            border: 2px solid rgba(139, 92, 246, 0.3);
             border-radius: 10px;
+            color: #ffffff;
             font-size: 16px;
+            border-bottom: 2px solid  #fc02a9;
             font-family: inherit;
             transition: all 0.3s;
-            background: rgba(255, 0, 221, 0.9);
-            color:white;
+            background: rgba(105, 5, 89, 0.9);
+            color: var(--text-dark);
         }
+
         input:focus, textarea:focus, select:focus {
             outline: none;
-            border-color: white;
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+            color: #faf8fa;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(231, 2, 252, 0.1);
         }
 
         textarea {
-            min-height: 80px;
-            color: aliceblue;
+            min-height: 100px;
             resize: vertical;
+            color: #faf4f4;
             line-height: 1.5;
         }
 
         .submit-btn {
-            background: purple;
+            background:rgb(173, 5, 159);
             color: var(--text-light);
             border: none;
-            padding: 10px 18px;
+            padding: 8px 15px;
             border-radius: 10px;
             font-size: 16px;
             font-weight: 600;
@@ -149,12 +142,10 @@
             justify-content: center;
             gap: 10px;
         }
-           input::placeholder{
-            color:antiquewhite;
-           }
+
         .submit-btn:hover {
             transform: translateY(-2px);
-            background-color: #ea00ff;
+            background-color: #fd05c7;
             box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
         }
 
@@ -162,12 +153,10 @@
         .avatar-preview {
             display: flex;
             align-items: center;
-            margin-top: 22px;
+            gap: 15px;
+            margin-top: 20px;
             padding: 15px;
-            margin-left: 1px;
-            background:transparent;
             border-radius: 10px;
-            border: none;
         }
 
         .avatar-preview span {
@@ -176,8 +165,8 @@
         }
 
         .avatar {
-            width: 40px;
-            height: 40px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -185,8 +174,8 @@
             font-weight: bold;
             font-size: 20px;
             color: white;
-            background:rgb(255, 1, 255);
-            flex-shrink: 0;
+            background:rgb(192, 4, 136) ;
+                        flex-shrink: 0;
         }
 
         /* Character Counter */
@@ -206,37 +195,40 @@
         /* Slider Container */
         .slider-container {
             position:relative;
-            max-width: 800px;
-            margin: 0 auto;
-            margin-left: 10%;
+            max-width: 1800px;
+            margin:3rem 0 auto;
+            margin-left: 0%;
         }
 
         .slider-header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
         }
 
         .slider-header h2 {
-            font-size: 1.6rem;
+            font-size: 2rem;
             font-weight: 700;
-            color: var(--text-light);
+            color:rgb(5, 252, 5);
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            background: rgba(255, 255, 255, 0.1);
+            gap: 15px;
+            background:transparent;
             padding: 15px 30px;
             border-radius: var(--radius);
-            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-bottom: 4px solid rgba(177, 189, 6, 0.3);
         }
 
         /* Slider Wrapper - FIXED SIZE */
         .slider-wrapper {
             position: relative;
-            width:500px;
             overflow: hidden;
+            width:320px;
+            border-bottom:4px solid rgb(252, 5, 252);
+            max-width:1600px;
             border-radius: var(--radius);
-            background: rgba(255, 255, 255, 0.05);
-            padding: 30px 0;
+            background:transparent;
+            left:0;
+            padding: 20px 0;
         }
 
         .slider-track {
@@ -247,8 +239,8 @@
 
         /* Testimonial Slide - FIXED CARD SIZE */
         .testimonial-slide {
-            flex: 0 0 1300px; /* Fixed card width */
-            width: 1300px;
+            flex: 0 0 320px; /* Fixed card width */
+            width: 280px;
             padding: 0 20px;
             box-sizing: border-box;
             opacity: 0.6;
@@ -263,16 +255,15 @@
 
         /* Testimonial Card - Compact Design */
         .testimonial-card {
-            background: var(--card-bg);
+            background: hwb(300 3% 49%);
             border-radius: var(--radius);
-            padding: 25px;
+            padding: 20px;
             box-shadow: var(--shadow);
-            border: 2px solid rgba(139, 92, 246, 0.2);
-            height: 280px; /* Fixed height */
+            border: 2px solid rgba(252, 3, 231, 0.938);
+            height: 250px; /* Fixed height */
             display: flex;
             flex-direction: column;
             transition: all 0.3s;
-            position: static;
             overflow: hidden;
         }
 
@@ -293,8 +284,8 @@
         }
 
         .avatar-lg {
-            width: 40px;
-            height: 40px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -331,7 +322,7 @@
         }
 
         .testimonial-text {
-            color: var(--text-dark);
+            color: white;
             line-height: 1.6;
             font-size: 0.95rem;
             flex: 1;
@@ -369,14 +360,15 @@
 
         /* Navigation Arrows - FIXED POSITION */
         .slider-nav {
-            position: absolute;
+            position:absolute;
             top: 50%;
             transform: translateY(-50%);
             width: 50px;
             height: 50px;
-            background: rgba(255, 255, 255, 0.9);
+            background:#f104be;
             border-radius: 50%;
-            display: flex;
+            display:flex;
+            text-align: center;
             align-items: center;
             justify-content: center;
             cursor: pointer;
@@ -384,13 +376,14 @@
             transition: all 0.3s;
             z-index: 10;
             border: none;
-            font-size: 22px;
+            margin:auto;
+            font-size: 20px;
+            font-weight: 900px;
             color: var(--primary);
         }
-
-        .slider-nav:hover {
+          .slider-nav:hover {
             background: var(--primary);
-            color: white;
+            color: #ac0754;
             transform: translateY(-50%) scale(1.1);
         }
 
@@ -426,28 +419,28 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 2, 234, 0.911);
             cursor: pointer;
             transition: all 0.3s;
         }
 
         .dot:hover {
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(1, 247, 34, 0.979);
         }
 
         .dot.active {
-            background: var(--accent);
+            background:rgb(233, 6, 225);
             transform: scale(1.3);
         }
 
         /* Admin Icon */
         .admin-icon {
             position: fixed;
-            bottom: 50px;
-            right: 20px;
-            width: 30px;
-            height: 30px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            bottom: 25px;
+            right: 25px;
+            width: 50px;
+            height: 50px;
+            background: rgb(253, 4, 212);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -483,150 +476,7 @@
             margin-bottom: 10px;
             color: var(--text-light);
         }
-         h4{
-            font-size: 1rem;
-            font-weight: bolder;
-            text-decoration: underline;
 
-         }
-         summary{
-            font-size: 0px;
-         }
-         h4:hover{
-            cursor: pointer;
-            transform: scale(1.0);
-            transition: all 0.3s;
-         }
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .testimonial-slide {
-                flex: 0 0 700px;
-                width: 700px;
-            }
-            
-            .testimonial-card {
-                height: 300px;
-                padding: 20px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.2rem;
-            }
-            
-            .form-section {
-                padding: 25px 20px;
-                max-width: 500px;
-            }
-            
-            .slider-wrapper {
-                padding: 25px 0;
-                width:500px;
-            }
-            
-            .testimonial-slide {
-                flex: 0 0 450px;
-                width: 450px;
-                padding: 0 15px;
-            }
-            
-            .testimonial-card {
-                height: 250px;
-                padding: 20px;
-            }
-            
-            .slider-nav {
-                width: 45px;
-                height: 45px;
-                font-size: 20px;
-            }
-            
-            .slider-nav.prev {
-                left: -1px;
-            }
-            
-            .slider-nav.next {
-                right: -1px;
-            }
-            
-            .avatar-lg {
-                width: 50px;
-                height: 50px;
-                font-size: 16px;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .header h1 {
-                font-size: 1.8rem;
-            }
-            
-            .slider-header h2 {
-                font-size: 1.5rem;
-                padding: 12px 20px;
-            }
-            
-            .testimonial-slide {
-                flex: 0 0 400px;
-                width: 400px;
-                padding: 0 10px;
-            }
-            
-            .testimonial-card {
-                height: 240px;
-                padding: 18px;
-            }
-            
-            .testimonial-info h3 {
-                font-size: 1.1rem;
-            }
-            
-            .testimonial-text {
-                font-size: 0.9rem;
-                max-height: 110px;
-            }
-            
-            .slider-nav {
-                width: 40px;
-                height: 40px;
-                font-size: 18px;
-            }
-            
-            .slider-nav.prev {
-                left: -1px;
-            }
-            
-            .slider-nav.next {
-                right: -1px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 20px 15px;
-            }
-            
-            .testimonial-slide {
-                flex: 1 0 280px;
-                width: 100px;
-            }
-            
-            .testimonial-card {
-                height: 230px;
-                padding: 15px;
-            }
-            
-            .testimonial-header {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .avatar-lg {
-                margin-right: 0;
-                margin-bottom: 10px;
-            }
-        }
 
         /* Animations */
         @keyframes fadeIn {
@@ -637,30 +487,150 @@
         .fade-in {
             animation: fadeIn 0.6s ease-out;
         }
+       summary{
+          width:10%;
+          margin: auto;
+        height:10;  
+        list-style: none;
+        cursor: pointer;
+        font-size: 0cap;
+        }
+        summary {
+  list-style: none;
+}
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+/* Plus icon */
+.toggle-btn::before {
+  content: "+";
+  font-size: 28px;
+  font-weight: bold;
+}
+   details[open] > summary.toggle-btn {
+  display: none;
+}
+
+/* Position it freely */
+.toggle-btn {
+  position: fixed;          /* or absolute */
+  top: 130px;
+  left: 10%;
+  z-index: 1000;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ff02c0;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+ .toggle-btn:hover{
+    background-color: #db0c9d;
+    transform: translateY(-60);
+    transition: 0.2s;
+ }
+
+   
+
+   .close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+   font-weight: 600;
+  background: transparent;
+  border: none;
+  font-size:3rem;
+  line-height: 1;
+  cursor: pointer;
+
+  color: #fd0404;
+}
+
+.section {
+  position: relative; /* anchor for close button */
+}
+
+                /* Responsive Design */
+        @media (min-width:1024px){
+            .testimonial-slide {
+                flex:0 0 740px;
+            }
+            .slider-header{
+                display: block;
+                margin:auto;
+            }
+            .form-section{
+                flex-direction: column;
+                top:0px;
+                height:90%;
+                width: 320px;
+                justify-content: left;
+               margin-left: 0;
+ 
+            }
+            details[open] ~ .section {
+      flex: 1;
+    }
+
+    details[open] {
+      order: 1; /* move first section left */
+    }
+
+    details[open] ~ .section {
+      order: 2; /* move second section right */
+    }
+
+    .container.details-open {
+      flex-direction: row; /* side by side */
+    }
+    
+            .slider-wrapper{
+              width:750px;
+                flex-direction: column;
+                transition: 100ms;
+                margin: auto;
+            }
+            .testimonial-card {
+                height: 240px;
+                padding: 10px;
+            }
+            .toggle-btn{
+                left: 25%;
+            }
+        }
+        
     </style>
 </head>
 <body>
+
     <!-- Main Container -->
-    <div class="container">
-        <details>
-            <summary><h4>Click To Share Your experience With us<h4></h4></summary>
+
+    <div class="container" id="container">
+      <details id="formDetails">
+             <summary class="toggle-btn" aria-label="Open form"></summary>
         <!-- Submit Form -->
+         <div class="section">
         <div class="form-section fade-in">
-
             <h2 class="form-title">📝 Share Your Experience</h2>
-
+            <button type="button" class="close-btn" id="closeDetails">×</button>
             <form id="testimonial-form">
                   <div class="avatar-preview">
                     <div id="avatar-preview" class="avatar">
-                        ??
+                        👨
                     </div>
-                </div>
-                
                 <div class="form-group">
-                    <label for="client-name">Your Name</label>
-                    <input type="text" id="client-name" placeholder="John Smith" required maxlength="50">
-                </div>
                 
+                 <label for="client-name">Your Name</label>
+                   <input type="text" id="client-name" placeholder="Your Name" required maxlength="50">
+                </div>
+                  </div>
                 <div class="form-group">
                     <label for="testimonial-text">Your Testimonial</label>
                     <textarea id="testimonial-text" placeholder="Tell us about your experience..." required maxlength="300"></textarea>
@@ -678,14 +648,16 @@
                     </select>
                 </div>
                 
-              
+                
                 <button type="submit" class="submit-btn">
                     <span>Submit Testimonial</span>
                 </button>
             </form>
         </div>
-        </details>
+         </div>
+</details>
         <!-- Testimonials Slider -->
+         <div class="section" id="secondSection">
         <div class="slider-container fade-in">
             <div class="slider-header">
                 <h2>
@@ -700,10 +672,10 @@
                 
                 <!-- Navigation Arrows -->
                 <button class="slider-nav prev" id="prev-btn" onclick="prevSlide()" aria-label="Previous testimonial">
-                    ←
+                    ◀️
                 </button>
                 <button class="slider-nav next" id="next-btn" onclick="nextSlide()" aria-label="Next testimonial">
-                    →
+                    ▶️
                 </button>
             </div>
             
@@ -713,7 +685,7 @@
             </div>
         </div>
     </div>
-
+    </div>
     <!-- Admin Icon -->
     <div class="admin-icon" id="admin-icon" title="Admin Panel" onclick="openAdminPanel()">
         ⚙️
@@ -731,6 +703,24 @@
         let autoSlideTimer = null;
         let testimonials = [];
         let slideWidth = 450; // Default card width
+
+        
+const details = document.getElementById('formDetails');
+  const container = document.getElementById('container');
+  const closeBtn = document.getElementById('closeDetails');
+  closeBtn.addEventListener('click', () => {
+    details.open = false;
+    container.classList.remove('details-open');
+  });
+
+  // When details is toggled, add/remove class for desktop layout
+  details.addEventListener('toggle', () => {
+    if(details.open) {
+      container.classList.add('details-open');
+    } else {
+      container.classList.remove('details-open');
+    }
+  });
         
         // ======================== INITIALIZATION ========================
         document.addEventListener('DOMContentLoaded', function() {
@@ -1045,7 +1035,7 @@
         
         // ======================== UTILITY FUNCTIONS ========================
         function generateAvatar(name) {
-            if (!name) return '??';
+            if (!name) return '👨';
             const words = name.trim().split(' ');
             if (words.length === 1) return words[0].substring(0, 2).toUpperCase();
             return (words[0][0] + words[words.length - 1][0]).toUpperCase();
@@ -1184,6 +1174,250 @@
                 showNotification('Incorrect password', 'error');
             }
         }
+        // ======================== ADMIN PANEL SIMPLIFIED ========================
+function openAdminPanel() {
+    // Create stylish modal instead of native prompt
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.85);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        font-family: 'Segoe UI', sans-serif;
+    `;
+    
+    modal.innerHTML = `
+        <div style="
+            background: linear-gradient(145deg, #1a1a2e 0%, #0f0f1a 100%);
+            padding: 30px;
+            border-radius: 12px;
+            border: 2px solid #8a2be2;
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.3);
+            min-width: 350px;
+            max-width: 90%;
+        ">
+            <h3 style="
+                color: #bb86fc;
+                margin: 0 0 20px 0;
+                font-size: 1.5em;
+                text-align: center;
+                text-shadow: 0 0 10px rgba(187, 134, 252, 0.5);
+                border-bottom: 1px solid #3700b3;
+                padding-bottom: 10px;
+            ">
+                🔐 Admin Panel
+            </h3>
+            
+            <input type="password" 
+                id="adminPasswordInput"
+                placeholder="Enter admin password..."
+                style="
+                    width: 100%;
+                    padding: 12px 15px;
+                    background: #121212;
+                    border: 1px solid #3700b3;
+                    border-radius: 6px;
+                    color: #e0e0e0;
+                    font-size: 16px;
+                    margin-bottom: 20px;
+                    box-sizing: border-box;
+                    transition: all 0.3s;
+                "
+                onfocus="this.style.outline='none'; this.style.borderColor='#bb86fc'; this.style.boxShadow='0 0 10px rgba(187, 134, 252, 0.3)'"
+                onblur="this.style.borderColor='#3700b3'; this.style.boxShadow='none'"
+            >
+            
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button id="adminSubmitBtn" style="
+                    background: linear-gradient(145deg, #6200ea, #3700b3);
+                    color: white;
+                    border: none;
+                    padding: 12px 25px;
+                    border-radius: 6px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                    flex: 1;
+                " onmouseover="this.style.background='linear-gradient(145deg, #7c4dff, #6200ea)'; this.style.transform='translateY(-2px)'"
+                   onmouseout="this.style.background='linear-gradient(145deg, #6200ea, #3700b3)'; this.style.transform='translateY(0)'">
+                    Authenticate
+                </button>
+                
+                <button id="adminCancelBtn" style="
+                    background: #212121;
+                    color: #bb86fc;
+                    border: 1px solid #3700b3;
+                    padding: 12px 25px;
+                    border-radius: 6px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                    flex: 1;
+                " onmouseover="this.style.background='#2d2d2d'; this.style.transform='translateY(-2px)'"
+                   onmouseout="this.style.background='#212121'; this.style.transform='translateY(0)'">
+                    Cancel
+                </button>
+            </div>
+            
+            <div id="adminMessage" style="
+                margin-top: 15px;
+                padding: 10px;
+                border-radius: 6px;
+                font-size: 14px;
+                text-align: center;
+                display: none;
+            "></div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Focus input
+    const input = modal.querySelector('#adminPasswordInput');
+    input.focus();
+    
+    // Submit function
+    modal.querySelector('#adminSubmitBtn').onclick = () => {
+        const password = input.value.trim();
+        
+        if (password === ADMIN_PASSWORD) {
+            modal.remove();
+            
+            // Create confirmation modal
+            const confirmModal = document.createElement('div');
+            confirmModal.style.cssText = modal.style.cssText;
+            
+            confirmModal.innerHTML = `
+                <div style="
+                    background: linear-gradient(145deg, #1a1a2e 0%, #0f0f1a 100%);
+                    padding: 30px;
+                    border-radius: 12px;
+                    border: 2px solid #ff416c;
+                    box-shadow: 0 0 30px rgba(255, 65, 108, 0.3);
+                    min-width: 350px;
+                    max-width: 90%;
+                ">
+                    <h3 style="
+                        color: #ff416c;
+                        margin: 0 0 20px 0;
+                        font-size: 1.5em;
+                        text-align: center;
+                        text-shadow: 0 0 10px rgba(255, 65, 108, 0.5);
+                        border-bottom: 1px solid #b00020;
+                        padding-bottom: 10px;
+                    ">
+                        ⚠️ DANGER ZONE
+                    </h3>
+                    
+                    <p style="
+                        color: #e0e0e0;
+                        text-align: center;
+                        line-height: 1.5;
+                        margin-bottom: 25px;
+                    ">
+                        Clear ALL testimonials?<br>
+                        <span style="color: #ff416c; font-weight: bold;">This action cannot be undone!</span>
+                    </p>
+                    
+                    <div style="display: flex; gap: 10px;">
+                        <button id="confirmClearBtn" style="
+                            background: linear-gradient(145deg, #ff416c, #b00020);
+                            color: white;
+                            border: none;
+                            padding: 12px 25px;
+                            border-radius: 6px;
+                            font-weight: bold;
+                            cursor: pointer;
+                            transition: all 0.3s;
+                            flex: 1;
+                        " onmouseover="this.style.background='linear-gradient(145deg, #ff6b95, #ff416c)'; this.style.transform='translateY(-2px)'"
+                           onmouseout="this.style.background='linear-gradient(145deg, #ff416c, #b00020)'; this.style.transform='translateY(0)'">
+                            YES, CLEAR ALL
+                        </button>
+                        
+                        <button id="cancelClearBtn" style="
+                            background: #212121;
+                            color: #bb86fc;
+                            border: 1px solid #3700b3;
+                            padding: 12px 25px;
+                            border-radius: 6px;
+                            font-weight: bold;
+                            cursor: pointer;
+                            transition: all 0.3s;
+                            flex: 1;
+                        " onmouseover="this.style.background='#2d2d2d'; this.style.transform='translateY(-2px)'"
+                           onmouseout="this.style.background='#212121'; this.style.transform='translateY(0)'">
+                            CANCEL
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(confirmModal);
+            
+            confirmModal.querySelector('#confirmClearBtn').onclick = () => {
+                testimonials = [];
+                currentSlide = 0;
+                saveTestimonials();
+                showNotification('All testimonials cleared', 'success');
+                confirmModal.remove();
+            };
+            
+            confirmModal.querySelector('#cancelClearBtn').onclick = () => {
+                confirmModal.remove();
+            };
+            
+        } else if (password !== '') {
+            const message = modal.querySelector('#adminMessage');
+            message.style.display = 'block';
+            message.style.background = 'rgba(207, 102, 121, 0.1)';
+            message.style.border = '1px solid #cf6679';
+            message.style.color = '#cf6679';
+            message.textContent = '✗ Incorrect password';
+            
+            input.style.borderColor = '#cf6679';
+            input.style.boxShadow = '0 0 10px rgba(207, 102, 121, 0.3)';
+            
+            setTimeout(() => {
+                input.style.borderColor = '#3700b3';
+                input.style.boxShadow = 'none';
+                message.style.display = 'none';
+            }, 3000);
+        }
+    };
+    
+    // Cancel function
+    modal.querySelector('#adminCancelBtn').onclick = () => {
+        modal.remove();
+    };
+    
+    // Enter key support
+    input.onkeypress = (e) => {
+        if (e.key === 'Enter') {
+            modal.querySelector('#adminSubmitBtn').click();
+        }
+    };
+    
+    // Escape key support
+    modal.onkeydown = (e) => {
+        if (e.key === 'Escape') {
+            modal.remove();
+        }
+    };
+    
+    // Close on outside click
+    modal.onclick = (e) => {
+        if (e.target === modal) {
+            modal.remove();
+        }
+    };
+}
         
         function escapeHtml(text) {
             const div = document.createElement('div');
