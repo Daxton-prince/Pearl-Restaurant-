@@ -52,6 +52,7 @@
 h2:hover{
      transform: translateY(-10px);
       transition: all 0.6s;
+      cursor: pointer;
 
 }
         h3 {
@@ -456,6 +457,64 @@ h2:hover{
             color: white;
             font-size: 2rem;
         }
+/* Grid */
+.gallery {
+  display:block;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  padding: 20px;
+  margin-left: 1%;
+  margin-top: 4rem;
+}
+
+.gallery img {
+  width: 30%;
+  height: 170px;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox img {
+  max-width: 100%;
+  height: 400px;
+  width: 800px;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* Controls */
+.nav {
+  position: absolute;
+  top: 50%;
+  font-size: 40px;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.prev { left: 20px; }
+.next { right: 20px; }
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 35px;
+  color: white;
+  cursor: pointer;
+}
 
       
         /* Contact Section */
@@ -698,7 +757,7 @@ h2:hover{
                 text-align: center;
                 
             }
-           
+
             .zoomed-image.active{
                  left: 40% !important;
 
@@ -728,7 +787,9 @@ h2:hover{
             .nav-container {
                 padding: 1rem;
             }
-      
+       .iframe{
+         width:100vh;
+       }
             nav ul {
                 position: fixed;
                 top: 70px;
@@ -815,4 +876,20 @@ summary{
     cursor: pointer;
      transform: translateY(-10px);
 }
-
+   #btn-link {
+        text-align: center;
+        text-decoration: none;
+        color: #f8f4f4;
+        padding: 2px;
+        display: block;
+        margin:auto;
+         box-shadow: 0 2px 15px rgba(248, 1, 96, 0.945);
+        border-radius: 10px;
+        background-color: #ad08ad;
+    }
+    #btn-link:hover{
+        cursor:pointer;
+        background-color: #fd03f1;
+        transform: translateY(-20%);
+        transition: 0.3s;
+    }
